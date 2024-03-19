@@ -13,6 +13,59 @@ import TextField from "@mui/material/TextField";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Textarea from '@mui/joy/Textarea';
 
+
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import Badge from '@mui/material/Badge';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MoreIcon from '@mui/icons-material/MoreVert';
+
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
+
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -67,14 +120,31 @@ function Header() {
           >
             <DrawerMobileNavigation />
           </IconButton>
-          <Typography
+          {/* <Typography
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, textAlign: "left", color: "inherit" }} // เปลี่ยนสีข้อความเป็นสีขาว
           >
             DiceDreams
+          </Typography> */}
+                    <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: 'none', sm: 'block' } }}
+          >
+            DiceDreams
           </Typography>
           <ThemeProvider theme={darkTheme}>
+          {/* <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search> */}
         <TextField
         placement="left-start"
           type="search"
@@ -93,11 +163,13 @@ function Header() {
           sx={{
             flexGrow: 1,
             maxWidth: "400px", 
-            marginRight: 2,
+            marginLeft: 2,
           }}
           
         />
         </ThemeProvider>
+        <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Button
             variant="contained"
             sx={{ background: "white", color: "black", marginRight: "10px" }}
@@ -110,6 +182,19 @@ function Header() {
           >
             Login
           </Button>
+          </Box>
+          {/* <Button
+            variant="contained"
+            sx={{ background: "white", color: "black", marginRight: "10px" }}
+          >
+            Register
+          </Button>
+          <Button
+            variant="contained"
+            sx={{ background: "red", color: "white", marginRight: "10px" }}
+          >
+            Login
+          </Button> */}
         </Toolbar>
       </AppBar>
     </div>
